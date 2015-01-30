@@ -1,0 +1,42 @@
+<template name="itemEntry">
+  <div>
+  {{#Animate}}
+  <div class="animatedFadeLeftBig animate animated">
+
+  <div class="item">
+
+    <div class="item-content">
+      <a href="{{pathFor 'itemPage'}}">
+
+        <!-- if no thumbnail (what should never be the case) show static image-->
+        {{#if thumbnail}}
+        <div class="item-entry-thumbnail img-rounded" style="background: url({{thumbnail}}) 50% 50% no-repeat; background-size: cover">
+          <!-- <img src="{{thumbnail}}" width="100px" height="100px"
+               class="img-rounded" alt="Rounded Image"/> -->
+        </div>
+        {{else}}
+          <img src="/images/125x125.jpg" width="100px"
+               height="100px" class="img-rounded" alt="No image found"/>
+        {{/if}}
+      </a>
+
+      <h3><a href="{{pathFor 'itemPage'}}">{{title}}</a></h3>
+
+      Enfernung: {{#if distance}}{{distance}}{{else}} - {{/if}} km
+
+      <p>
+        {{#if ownItem}}
+       <a href="{{pathFor 'itemEdit'}}">Edit</a>{{/if}}
+
+      </p>
+      <p>
+        <a href="{{pathFor 'itemPage'}}">{{commentsCount}} comments</a>
+      </p>
+    </div>
+    <!-- <a href="{{pathFor 'itemPage'}}" class="discuss btn">Discuss</a> -->
+    <span class="badge info discuss">{{interestedUsersCount}}</span>
+  </div>
+</div>
+{{/Animate}}
+</div>
+</template>

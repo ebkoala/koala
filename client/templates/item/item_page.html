@@ -1,0 +1,324 @@
+<template name="itemPage">
+  <div>
+  {{#Animate}}
+  <div class="animatedFadeLeftBig animate animated">
+      <div id="panell" class="panel panel-default {{addMarginClass}}">
+
+    <div class="panel-heading">
+      <h3 class="panel-title">{{title}}</h3>
+      {{#if ownItem}}<a href="{{pathFor 'itemEdit'}}">Bearbeiten</a>{{/if}}
+
+    </div>
+
+    <div class="panel-body">
+
+      <!-- show item's pic next to each other -->
+      <div class="row-fluid">
+
+            {{#each photos}}
+                  {{> photo}}
+            {{/each}}
+      </div>
+
+    </div>
+
+    <div class="panel-body">
+        <strong>Beschreibung: </strong>{{description}} <br/>
+        <strong>Entfernung: </strong> {{#if distance}}{{distance}} {{else}} - {{/if}} km<br/>
+        <strong>Eingestellt von: </strong><a href="{{pathFor 'profile'}}"> {{author}}</a><br/>
+        <strong>Eingestellt am: </strong> {{submittedText}}<br/>
+        {{#if ownItem}}<strong>Interessierte Benutzer: </strong>
+
+          {{#each interestedUsers}}
+            <a href="users/{{this._id}}">{{this.username}}</a>
+          {{/each}}
+        {{/if}}<br/>
+
+
+        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Febkoala.meteor.com%2Fitems%2F{{_id}}&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px;" allowTransparency="true"></iframe>
+    </div>
+
+
+
+    {{#unless ownItem}}
+      <!-- TODO show message if user already torn off tearoff strip -->
+
+
+      <!-- Vassil: I couldnt get that to work. I will do it static instead. -->
+      <!--{{#each interestedUsers}}
+      {{#with itemPage}}
+        {{#if isTornOff "1"}}
+          <div id="tearoff{{getTearOffIndex}}" class="tearoff-strip tearoff-strip-torn">Ja :)
+          </div>
+        {{else}}
+          <div id="tearoff{{getTearOffIndex}}" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+
+      {{/with}}
+
+      {{/each}} -->
+
+      <!-- So I did it that ugly ugly way :)  I hope we will achieve to do it with {{#each}} somehow-->
+
+
+      {{#if existStrip 0}}
+        {{#if isTornOff 0}}
+          {{#if isTornOffByCurrentUser 0}}
+            <div id="tearoff0" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff0" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff0" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 1}}
+        {{#if isTornOff 1}}
+          {{#if isTornOffByCurrentUser 1}}
+            <div id="tearoff1" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff1" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff1" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 2}}
+        {{#if isTornOff 2}}
+          {{#if isTornOffByCurrentUser 2}}
+            <div id="tearoff2" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff2" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff2" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 3}}
+        {{#if isTornOff 3}}
+          {{#if isTornOffByCurrentUser 3}}
+            <div id="tearoff3" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff3" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff3" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 4}}
+        {{#if isTornOff 4}}
+          {{#if isTornOffByCurrentUser 4}}
+            <div id="tearoff4" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff4" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff4" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 5}}
+        {{#if isTornOff 5}}
+          {{#if isTornOffByCurrentUser 5}}
+            <div id="tearoff5" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff5" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff5" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 6}}
+        {{#if isTornOff 6}}
+          {{#if isTornOffByCurrentUser 6}}
+            <div id="tearoff6" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff6" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff6" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 7}}
+        {{#if isTornOff 7}}
+          {{#if isTornOffByCurrentUser 7}}
+            <div id="tearoff7" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff7" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff7" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 8}}
+        {{#if isTornOff 8}}
+          {{#if isTornOffByCurrentUser 8}}
+            <div id="tearoff1" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff1" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff1" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 9}}
+        {{#if isTornOff 9}}
+          {{#if isTornOffByCurrentUser 9}}
+            <div id="tearoff9" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff9" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff9" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 10}}
+        {{#if isTornOff 10}}
+          {{#if isTornOffByCurrentUser 10}}
+            <div id="tearoff10" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff10" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff10" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 11}}
+        {{#if isTornOff 11}}
+          {{#if isTornOffByCurrentUser 11}}
+            <div id="tearoff11" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff11" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff11" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 12}}
+        {{#if isTornOff 12}}
+          {{#if isTornOffByCurrentUser 12}}
+            <div id="tearoff12" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff12" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff12" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 13}}
+        {{#if isTornOff 13}}
+          {{#if isTornOffByCurrentUser 13}}
+            <div id="tearoff13" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff13" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff13" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if existStrip 14}}
+        {{#if isTornOff 14}}
+          {{#if isTornOffByCurrentUser 14}}
+            <div id="tearoff14" class="tearoff-strip animated tearoff-strip-torn">Ja :)
+            </div>
+          {{else}}
+            <div id="tearoff14" class="tearoff-strip-hidden" >Ja :)
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="tearoff14" class="tearoff-strip animated">Ja :)
+          </div>
+        {{/if}}
+      {{/if}}
+
+    <!-- End of the static solution-->
+
+
+    {{/unless}}
+
+  </div>
+
+
+
+
+  <!-- when no comments exist we show this message -->
+  {{#if noComments}}
+  <div class="alert alert-info" role="alert">
+    Es gibt noch keine Kommentare. Sei der Erste der einen Kommentar hinterlässt!
+  </div>
+  {{/if}}
+
+  <!-- show comments -->
+  <ul class="comments">
+    {{#each comments}}
+      {{> comment}}
+    {{/each}}
+  </ul>
+
+  <!-- add a comment if logged in -->
+  {{#if currentUser}}
+      {{> commentSubmit}}
+    {{else}}
+      <p>Bitte logge dich ein, um einen Kommentar zu hinterlassen.</p>
+  {{/if}}
+</div>
+{{/Animate}}
+</div>
+
+</template>

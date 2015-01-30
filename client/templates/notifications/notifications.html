@@ -1,0 +1,24 @@
+<template name="notifications">
+  <a href="#" class="glyphicon glyphicon-bell" data-toggle="dropdown">
+    {{#if notificationCount}}
+      <span class="badge badge-notify">{{notificationCount}}</span>
+    {{/if}}
+    Benachrichtigungen</a> 
+  <ul class="notification dropdown-menu">
+    {{#if notificationCount}}
+      {{#each notifications}}
+        {{> notification}}
+      {{/each}}
+    {{else}}
+      <li><span>No Notifications</span></li>
+    {{/if}}
+  </ul>
+</template>
+
+<template name="notification">
+  <li>
+    <a class="notification-entry" href="{{notificationItemPath}}">
+      <strong>{{commenterName}}</strong> {{notificationText}}
+    </a>
+  </li>
+</template>

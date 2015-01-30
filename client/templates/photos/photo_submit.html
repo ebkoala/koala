@@ -1,0 +1,40 @@
+<template name="photoSubmit">
+
+
+    <!-- if the picture doesnt exist, show camera and gallery icon -->
+    {{#unless photo}}
+
+      <button type="button" class="btn btn-default take-photo"
+              aria-label="Take Photo">
+        <span class="glyphicon glyphicon glyphicon-camera"
+              aria-hidden="true">
+        </span>
+      </button>
+
+      <!-- <button type="button" class="btn btn-default choose-photo"
+              aria-label="Take Photo">
+        <span class="glyphicon glyphicon glyphicon-picture"
+              aria-hidden="true">
+        </span>
+      </button> -->
+    {{/unless}}
+
+    <!-- if the pic exists, show it -->
+    {{#if photo}}
+      <div class="thumbnail">
+
+        <img src="{{photo}}" alt="photo_{{photoIndex}}">
+
+        <div class="caption">
+          <a href="#" class="btn btn-primary retake-photo"
+             role="button">Bild erneut aufnehmen
+          </a>
+
+          <a href="#" class="btn btn-danger delete-photo"
+             role="button">Bild löschen
+          </a>
+        </div>
+      </div>
+    {{/if}}
+
+</template>
